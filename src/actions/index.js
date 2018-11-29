@@ -1,42 +1,47 @@
-import * as types from './../contanst/types';
-import apiCall from './../utils/apiCaller';
+import * as types from './../contanst/types'
+import { filter } from 'lodash'
 import { database } from './../firebase/config'
 
+const getDataFirebase = (endpoint, child = '') => {
+    return new Promise((resolve, reject) => {
+        database.ref(endpoint)
+            .once('value')
+            .then(snapshot => {
+                const fbData = []
+                snapshot.forEach(item => {
+                    fbData.push({
+                        id: item.key,
+                        ...item.val()
+                    })
+                })
+                resolve(fbData)
+            })
+            .catch(err => {
+                reject(err)
+            })
+    })
 
-export const fetchProductAct = (products) => {
+}
+
+export const fetchProductsAct = (products) => {
     return {
         type: types.FETCH_PRODUCTS,
         products
     }
 }
 
-export const fetchProductRequest = () => {
-    return dispatch => {
-        return database.ref('products').once('value').then(snapshot => {
-            const products = [];
-            snapshot.forEach(item => {
-                products.push({
-                    id: item.key,
-                    ...item.val()
-                });
-            });
-            dispatch(fetchProductAct(products));
-        });
-    }
-}
-
-export const deleteProductAct = (id) => {
+export const fetchProductByIdAct = (product) => {
     return {
-        type: types.DELETE_PRODUCT,
-        id
+        type: types.FETCH_PRODUCTBYID,
+        product
     }
 }
 
-export const deleteProductRequest = (id) => {
-    return dispatch => {
-        return apiCall(`products/${id}`, 'DELETE', null).then(res => {
-            dispatch(deleteProductAct(res.data.id));
-        })
+
+export const fetchProductsByCategoryAct = (products) => {
+    return {
+        type: types.FETCH_PRODUCTSBYCATEGORY,
+        products
     }
 }
 
@@ -44,6 +49,23 @@ export const addProductAct = (product) => {
     return {
         type: types.ADD_PRODUCT,
         product
+    }
+}
+
+
+export const filterCategory = (category) => {
+    return {
+        type: types.FILTER_CATEGORY,
+        category
+    }
+}
+
+
+export const fetchProductRequest = () => {
+    return dispatch => {
+        getDataFirebase('products').then(fbData => {
+            dispatch(fetchProductsAct(fbData))
+        })
     }
 }
 
@@ -60,39 +82,28 @@ export const addProductRequest = (product) => {
     }
 }
 
-export const fetchProductByIdAct = (product) => {
-    return {
-        type: types.FETCH_PRODUCTBYID,
-        product
+export const fetchProductsByCategoryRequest = (category) => {
+    return dispatch => {
+        getDataFirebase('products')
+            .then(products => {
+                const filterProducts = filter(products, (value) => {
+                    return value.productCategory === category
+                })
+                dispatch(fetchProductsByCategoryAct(filterProducts))
+            })
     }
 }
+
 
 export const fetchProductByIdRequest = (id) => {
     return dispatch => {
-        return apiCall(`products/${id}`, 'GET', null).then(res => {
-            dispatch(fetchProductByIdAct(res.data))
-        })
-    }
-}
-
-export const updateProductAct = (newProductValue) => {
-    return {
-        type: types.UPDATE_PRODUCT,
-        newProductValue
-    }
-}
-
-export const updateProductRequest = (newProductValue) => {
-    return dispatch => {
-        return apiCall(`products/${newProductValue.id}`, 'PUT', newProductValue).then(res => {
-            dispatch(updateProductAct(res.data))
-        })
-    }
-}
-
-export const filterCategory = (category) => {
-    return {
-        type: types.FILTER_CATEGORY,
-        category
+        database.ref('products').child(id)
+            .once('value')
+            .then(ref => {
+                dispatch(fetchProductByIdAct({
+                    id: ref.key,
+                    ...ref.val()
+                }))
+            })
     }
 }

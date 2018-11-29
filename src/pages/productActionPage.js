@@ -148,9 +148,6 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         fetchProductById: (productId) => {
             dispatch(actions.fetchProductByIdRequest(productId))
-        },
-        updateProduct: (newProductValue) => {
-            dispatch(actions.updateProductRequest(newProductValue))
         }
     }
 }

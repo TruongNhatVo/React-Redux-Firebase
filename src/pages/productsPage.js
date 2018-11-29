@@ -15,12 +15,10 @@ class ProductsPage extends Component {
             activePage: 1,
             itemPerPage: 8
         }
-
     }
 
     componentDidMount() {
         this.props.fetchAllProducts()
-
     }
 
     handlePageChange = (pageNumber) => {
@@ -64,8 +62,7 @@ class ProductsPage extends Component {
         let refCategory = this.props.category
         if (refCategory !== 'All') {
             products = filter(products, (value) => {
-                console.log(refCategory);
-                return value.productCategory == refCategory
+                return value.productCategory === refCategory
             })
         }
 
@@ -101,9 +98,6 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         fetchAllProducts: () => {
             dispatch(actions.fetchProductRequest())
-        },
-        deleterProduct: (id) => {
-            dispatch(actions.deleteProductRequest(id))
         },
         filterCategory: (value) => {
             dispatch(actions.filterCategory(value))

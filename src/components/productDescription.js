@@ -12,13 +12,14 @@ export default class ProductDescription extends Component {
             <ListIcon />
 
             <p className="lead">
-              <span>$100</span>
+              <span>{this.props.price} $</span>
             </p>
 
-            <p className="lead font-weight-bold">Description</p>
+            <p className="lead font-weight-bold">{this.props.name}</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa sint voluptatibus!
-              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
+            <p>
+              {this.props.description ? this.props.description : 'No Description' }
+            </p>
 
             <AddCartForm />
 
