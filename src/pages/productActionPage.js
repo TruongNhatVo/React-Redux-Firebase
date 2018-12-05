@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Form from "react-jsonschema-form"
 import { connect } from 'react-redux'
-import * as actions from './../actions/index'
+import * as actions from './../actions/product.js'
 import { storage } from './../firebase/config'
 
 const schema = {
@@ -40,13 +40,6 @@ class ProductActionPage extends Component {
             },
             productImage: null
         };
-    }
-
-    componentDidMount() {
-        let { match } = this.props
-        if (match) {
-            this.props.fetchProductById(match.params.id)
-        }
     }
 
     onChangeValue = (data) => {
@@ -145,9 +138,6 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         saveProduct: (product) => {
             dispatch(actions.addProductRequest(product))
-        },
-        fetchProductById: (productId) => {
-            dispatch(actions.fetchProductByIdRequest(productId))
         }
     }
 }

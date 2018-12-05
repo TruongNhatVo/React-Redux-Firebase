@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import * as firebase from 'firebase'
 
 var config = {
   apiKey: "AIzaSyDXD3rFUyhl71JFojYAr5MsosrhmCY0EG0",
@@ -7,8 +7,13 @@ var config = {
   projectId: "react-redux-firebase-f77d6",
   storageBucket: "react-redux-firebase-f77d6.appspot.com",
   messagingSenderId: "690674682102"
-};
+}
 
-firebase.initializeApp(config);
+ firebase.initializeApp(config)
 export const storage = firebase.storage()
-export const database = firebase.database();
+export const database = firebase.database()
+export const authentication = firebase.auth()
+export const providerType = (type) => {
+  return new firebase.auth[`${type}AuthProvider`]()
+}
+// export const firebase

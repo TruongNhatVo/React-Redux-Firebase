@@ -1,6 +1,6 @@
-import * as types from './../contanst/types'
+import * as types from '../contanst/types'
 import { filter } from 'lodash'
-import { database } from './../firebase/config'
+import { database } from '../firebase/config'
 
 const getDataFirebase = (endpoint, child = '') => {
     return new Promise((resolve, reject) => {

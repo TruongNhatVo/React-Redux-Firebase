@@ -25,7 +25,7 @@ export default class ProductCategory extends Component {
                 onClick={() => this.checkActive(key,item)}
                 key={key}
               >
-                <a className="nav-link">{item}</a>
+                <span className="nav-link">{item}</span>
               </li>
     })
   }

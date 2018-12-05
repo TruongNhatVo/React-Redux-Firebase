@@ -1,5 +1,4 @@
 import * as types from './../contanst/types'
-import { findIndex } from 'lodash'
 
 var initialState = [];
 

@@ -1,10 +1,10 @@
+import ProductCategory from './../components/productCategory'
 import Products from './../components/products'
 import Product from './../components/product'
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import * as actions from './../actions/index'
+import * as actions from './../actions/product.js'
 import Pagination from "react-js-pagination"
-import ProductCategory from './../components/productCategory'
 import { filter } from 'lodash'
 
 class ProductsPage extends Component {
@@ -74,13 +74,19 @@ class ProductsPage extends Component {
                 <Products>
                     {this.showProducts(products)}
                 </Products>
-                <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={this.state.itemPerPage}
-                    totalItemsCount={this.props.products.length}
-                    pageRangeDisplayed={8}
-                    onChange={this.handlePageChange}
-                />
+                <nav className="d-flex justify-content-center wow fadeIn">
+                    <Pagination
+                        innerClass="pagination pg-blue"
+                        linkClass="page-link waves-effect waves-effect"
+                        itemClass="page-item"
+                        hideNavigation="true"
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={this.state.itemPerPage}
+                        totalItemsCount={this.props.products.length}
+                        pageRangeDisplayed={8}
+                        onChange={this.handlePageChange}
+                    />
+                </nav>
             </Fragment>
         )
     }

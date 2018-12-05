@@ -11,7 +11,10 @@ export default class AddCartForm extends Component {
   }
 
   oneChangeQuality = (event) => {
-    this.setState({value: event.target.value});
+    const {value} = event.target
+    if(value > 0) {
+      this.setState({value : value})
+    }
   }
 
   onAddCart = (event) => {

@@ -48,9 +48,9 @@ class Menu extends Component {
 			<nav className="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
 				<div className="container">
 
-					<a className="navbar-brand waves-effect">
+					<Link className="navbar-brand waves-effect" to="/">
 						<strong className="blue-text">MDB</strong>
-					</a>
+					</Link>
 
 					<NavButtonToggle />
 

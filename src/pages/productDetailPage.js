@@ -3,15 +3,15 @@ import ProductThumb from './../components/productThumb'
 import ProductDescription from './../components/productDescription'
 import CategoryDescription from './../components/categoryDescription'
 import ProductSlider from './../components/productSlider'
-import * as actions from './../actions/index'
+import * as actions from './../actions/product.js'
 import { connect } from 'react-redux'
 import { filter, chunk } from 'lodash'
 
 class ProductDetailPage extends Component {
 
   componentDidMount = () => {
-    let { match } = this.props
-    let { id } = match.params
+    const { match } = this.props
+    const { id } = match.params
     this.props.fetchProductById(id)
     
   }
@@ -26,13 +26,21 @@ class ProductDetailPage extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    if(nextProps.match.url !== this.props.match.url) {
+      const idUpdate = nextProps.match.params.id
+      this.props.fetchProductById(idUpdate)
+      window.scrollTo(0, 0)
+    }
+    return true
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.product !== prevProps.product) {
       const {productCategory} = this.props.product
       this.props.fetchRelateProduct(productCategory)
     }
   }
-
 
   render() {
 

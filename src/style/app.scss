@@ -1,6 +1,25 @@
+@import './tab';
+
 body {
   padding-top: 80px;
   #cart-form {
     width: 100px;
   }
+  #root {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 15em;
+    @media screen and (max-width : 576px) {
+      padding-bottom: 20em;
+    }
+    footer {
+      width: 100%;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
+#authentication__page .card-body {
+  padding: 5vw;
 }

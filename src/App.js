@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Menu from './components/menu';
+import Footer from './components/footer'
 import routes from './router';
 import './style/app.scss';
 
@@ -30,6 +31,7 @@ class App extends Component {
               {this.switchLink(routes)}
             </Switch>
           </div>
+          <Footer />
         </div>
       </Router>
     );

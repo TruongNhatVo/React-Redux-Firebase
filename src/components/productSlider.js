@@ -1,15 +1,23 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 export default class ProductSlider extends Component {
 
   showProductSubItems = (subItems) => {
     subItems = subItems.map((subItem, index) => {
-      return <img
-        key={index}
-        src={subItem.productImageUrl}
-        className={ index > 0 ? 'img-responsive w-25' : 'img-responsive' }
-        alt="Image" />
-      })
+      return <div 
+                className={subItems.length > 1 ? 'col-4' : 'col-12'} 
+                key={index}
+              >
+                <Link to={`/product/${subItem.id}`}>
+                  <img
+                    src={subItem.productImageUrl}
+                    className='img-fluid w-100'
+                    alt={subItem.productName}
+                    />
+                </Link>
+              </div>
+    })
     return subItems
   }
 
@@ -17,9 +25,9 @@ export default class ProductSlider extends Component {
     items = Object.values(items).map((item, index) => {
       return <div
         key={index}
-        className={index == 0 ? "carousel-item active" : "carousel-item"}
+        className={index === 0 ? "carousel-item active" : "carousel-item"}
       >
-        <div className="row d-flex justify-content-around">
+        <div className="row">
           {this.showProductSubItems(item)}
         </div>
       </div>
