@@ -35,7 +35,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     loginAction: (type) => {
-      dispatch(actions.authenticate(type))
+      dispatch(actions.signInWithProvider(type))
     }
   }
 }

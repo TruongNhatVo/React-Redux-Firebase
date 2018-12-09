@@ -32,7 +32,7 @@ const MenuLink = ({ path, exact, label }) => {
 		exact={exact}
 		children={({ match }) => (
 			<li className={match ? "nav-item active" : "nav-item"}>
-				<Link className="nav-link waves-effect"  to={path}>{label}
+				<Link className="nav-link waves-effect" to={path}>{label}
 					<span className="sr-only">(current)</span>
 					{match ? <span className="sr-only">(current)</span> : ""}
 				</Link>
@@ -59,6 +59,14 @@ class Menu extends Component {
 						<ul className="navbar-nav mr-auto">
 							{this.showMenu(menu)}
 						</ul>
+						<Link to='login'>
+							<button
+								type="button"
+								class="btn btn-outline-primary"
+							>
+								Login
+							</button>
+						</Link>
 						<CartButton />
 					</div>
 

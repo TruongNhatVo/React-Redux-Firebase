@@ -4,8 +4,9 @@ import Form from "react-jsonschema-form"
 const schema = {
   type: "object",
   properties: {
-    UserName: {
-      type: 'string'
+    userName: {
+      type: 'string',
+      title: 'UserName'
     },
     email: {
       type: 'string'
@@ -21,7 +22,7 @@ const schema = {
   }
 }
 
-const validate = (formData,errors) => {
+const validate = (formData, errors) => {
   if (formData.password !== formData.comfirmPassword) {
     errors.comfirmPassword.addError("Your password is not match");
   }
@@ -55,7 +56,6 @@ export default class SignUpForm extends Component {
     }
   }
 
-
   onChangeValue = (val) => {
     this.setState({
       user: val.formData
@@ -63,11 +63,12 @@ export default class SignUpForm extends Component {
   }
 
   addUser = (user) => {
-    this.props.user(user)
+    this.props.signUpWithUser(user);
   }
 
   render() {
 
+    const { errorSignUp } = this.props
     return (
       <div className="card card-signin my-5 wow fadeIn">
         <div className="card-body">
@@ -82,6 +83,9 @@ export default class SignUpForm extends Component {
             validate={validate}
             showErrorList={true}
           >
+            {
+              errorSignUp ? <h3 className="text-danger">{ errorSignUp }</h3> : ''
+            }
             <button
               className="btn btn-lg btn-secondary btn-block text-uppercase" type="submit"
             >

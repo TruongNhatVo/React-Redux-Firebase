@@ -36,7 +36,7 @@ export default class LoginForm extends Component {
             schema={schema}
           >
             <div className="custom-control mb-3 pl-0">
-              <Link to="/">
+              <Link to="/signup">
                 Sign up for new account
               </Link>
             </div>
